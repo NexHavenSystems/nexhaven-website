@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="add-ons.css">
 </head>
 <body>
 <header>
@@ -48,6 +49,7 @@
           <li>Email support</li>
           <li>Scheduling support</li>
         </ul>
+        <div class="offer-addon"><b>Optional add-on</b><span>Phone support for an additional 1.5%</span></div>
       </aside>
     </div>
   </section>
@@ -104,7 +106,9 @@
       <div class="calculator">
         <label for="collections">Illustrative monthly collections</label>
         <input id="collections" type="range" min="25000" max="500000" step="5000" value="150000">
+        <label class="phone-option"><input id="phone-support" type="checkbox"> Add phone support (+1.5%)</label>
         <div class="calculator-result"><span id="collections-label">$150,000 collected</span><strong id="fee-label">$7,500/mo</strong></div>
+        <div class="rate-label" id="rate-label">Base package · 5%</div>
         <small>Illustration only. Final pricing follows the signed service agreement.</small>
       </div>
     </div>
@@ -121,7 +125,7 @@
 <footer>
   <div class="wrap footer-grid">
     <div><a class="brand" href="#top"><span>N</span><div><b>NexHaven</b><small>Systems</small></div></a><p>Protect your revenue. Lighten your front office.</p></div>
-    <div><b>Services</b><a href="#services">Revenue operations</a><a href="#services">Email support</a><a href="#services">Scheduling support</a></div>
+    <div><b>Services</b><a href="#services">Revenue operations</a><a href="#services">Email support</a><a href="#services">Scheduling support</a><a href="#pricing">Optional phone support</a></div>
     <div><b>Contact</b><a href="mailto:info@nexhavenos.com">info@nexhavenos.com</a><span>7901 4th St N, Ste 300</span><span>St. Petersburg, FL 33702</span></div>
     <div><b>Legal</b><a href="privacy.html">Privacy Policy</a><span>© <span id="year"></span> NexHaven Systems LLC</span></div>
   </div>
