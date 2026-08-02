@@ -12,6 +12,22 @@
   font-size: 13px;
 }
 
+.pressure { background: #eef4f0; }
+.quote-grid,.decision-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px; }
+.quote-grid blockquote,.decision-grid article { margin:0;padding:26px;background:#fff;border:1px solid var(--line);border-radius:var(--r); }
+.quote-grid blockquote p { margin-top:0;font:600 20px/1.45 Manrope,sans-serif; }
+.quote-grid cite,.source-note,.economics-note,.hire-comparison small { color:var(--muted);font-size:13px;font-style:normal; }
+.quote-grid a,.economics-note a { color:var(--green); }
+.source-note { margin-top:18px; }
+.hire-comparison { display:grid;gap:3px;margin:20px 0 12px;padding:18px 0;border-block:1px solid #bfd7c8; }
+.hire-comparison strong { font:700 22px Manrope,sans-serif; }
+.economics-note { margin-top:24px; }
+.decision { padding-top:0; }
+.decision-grid article ul { padding-left:20px; }
+.decision-grid article li+li { margin-top:9px; }
+.decision-grid .different { background:#e5f2ea;border-color:#bfd7c8; }
+@media(max-width:900px){.quote-grid,.decision-grid{grid-template-columns:1fr}}
+
 .phone-option {
   display: flex;
   align-items: center;
