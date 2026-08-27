@@ -43,7 +43,7 @@ if(form){
     const lines=[
       "Revenue Leakage Assessment","",
       `Name: ${payload.name}`,`Company: ${payload.company}`,`Email: ${payload.email}`,`Phone: ${payload.phone||""}`,
-      `Vertical: ${payload.vertical}`,`Annual revenue: ${payload.annual_revenue||""}`,
+      `Vertical: ${payload.vertical}`,`Annual revenue: ${payload.annual_revenue||""}`,`Primary system: ${payload.system||""}`,`Jobs per month: ${payload.monthly_jobs||""}`,
       `Outstanding A/R: $${payload.outstanding_ar||0}`,`Stale estimates: $${payload.stale_estimates_value||0}`,
       `Current process: ${payload.follow_up_process||""}`,`Main bottleneck: ${payload.bottleneck||""}`,
       "",`Attribution: ${JSON.stringify(attribution)}`
