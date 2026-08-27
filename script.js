@@ -1,75 +1,54 @@
-const menu = document.getElementById("menu");
-const nav = document.getElementById("nav");
-if (menu && nav) {
-  menu.addEventListener("click", () => {
-    const open = nav.classList.toggle("open");
-    menu.setAttribute("aria-expanded", String(open));
-  });
-}
+const menu=document.getElementById("menu"),nav=document.getElementById("nav");
+if(menu&&nav)menu.addEventListener("click",()=>{const open=nav.classList.toggle("open");menu.setAttribute("aria-expanded",String(open))});
+const year=document.getElementById("year");if(year)year.textContent=String(new Date().getFullYear());
 
-const compareCollections = document.getElementById("compare-collections");
-const compareClaims = document.getElementById("compare-claims");
-const compareCollectionsLabel = document.getElementById("compare-collections-label");
-const compareClaimsLabel = document.getElementById("compare-claims-label");
-const percentagePrice = document.getElementById("percentage-price");
-const claimPriceRange = document.getElementById("claim-price-range");
-const breakEvenCopy = document.getElementById("break-even-copy");
-if (compareCollections && compareClaims && compareCollectionsLabel && compareClaimsLabel && percentagePrice && claimPriceRange && breakEvenCopy) {
-  const comparisonMoney = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-  const updateComparison = () => {
-    const collections = Number(compareCollections.value);
-    const claims = Number(compareClaims.value);
-    const percentage = collections * 0.05;
-    const low = claims * 6;
-    const high = claims * 8;
-    const average = collections / claims;
-    compareCollectionsLabel.textContent = comparisonMoney.format(collections);
-    compareClaimsLabel.textContent = `${claims.toLocaleString()} claims`;
-    percentagePrice.textContent = `${comparisonMoney.format(percentage)}/mo`;
-    claimPriceRange.textContent = `${comparisonMoney.format(low)}–${comparisonMoney.format(high)}/mo`;
-    const relationship = percentage < low
-      ? "The 5% package is lower at these inputs and includes email and scheduling support."
-      : percentage > high
-        ? "The per-claim estimate is lower at these inputs, but it covers a narrower, contract-defined workflow."
-        : "The estimates overlap at these inputs; the deciding factor is the support scope you need.";
-    breakEvenCopy.textContent = `Average collection is ${comparisonMoney.format(average)} per claim. ${relationship}`;
+const params=new URLSearchParams(location.search);
+const attributionKeys=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","msclkid"];
+const attribution=JSON.parse(sessionStorage.getItem("nh_attribution")||"{}");
+attributionKeys.forEach(k=>{if(params.get(k))attribution[k]=params.get(k)});
+if(!attribution.first_landing_page)attribution.first_landing_page=location.pathname;
+attribution.last_landing_page=location.pathname;
+if(!attribution.first_referrer)attribution.first_referrer=document.referrer||"direct";
+sessionStorage.setItem("nh_attribution",JSON.stringify(attribution));
+
+window.dataLayer=window.dataLayer||[];
+const track=(event,detail={})=>window.dataLayer.push({event,...detail});
+document.querySelectorAll("[data-event]").forEach(el=>el.addEventListener("click",()=>track(el.dataset.event,{page_path:location.pathname})));
+
+const form=document.getElementById("assessment-form");
+if(form){
+  const money=new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0});
+  const estimate=document.getElementById("recovery-estimate"),status=document.getElementById("form-status");
+  const updateEstimate=()=>{
+    const ar=Number(form.elements.outstanding_ar.value||0),est=Number(form.elements.stale_estimates_value.value||0);
+    const low=ar*.08+est*.03,high=ar*.22+est*.10;
+    estimate.innerHTML=low>0?`<strong>${money.format(low)}–${money.format(high)}</strong><p>Illustrative 30-day opportunity range—not a guarantee. A portfolio review validates what is actionable.</p>`:"<strong>Enter portfolio values</strong><p>We’ll show a conservative planning range for the first review.</p>";
   };
-  compareCollections.addEventListener("input", updateComparison);
-  compareClaims.addEventListener("input", updateComparison);
-  updateComparison();
-}
-
-const year = document.getElementById("year");
-if (year) year.textContent = String(new Date().getFullYear());
-
-const range = document.getElementById("collections");
-const collectionsLabel = document.getElementById("collections-label");
-const feeLabel = document.getElementById("fee-label");
-const foundingRate = document.getElementById("founding-rate");
-const rateLabel = document.getElementById("rate-label");
-const comparisonLabel = document.getElementById("comparison-label");
-if (range && collectionsLabel && feeLabel && foundingRate && rateLabel && comparisonLabel) {
-  const money = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
+  ["outstanding_ar","stale_estimates_value"].forEach(name=>form.elements[name].addEventListener("input",updateEstimate));
+  updateEstimate();
+  form.addEventListener("submit",event=>{
+    event.preventDefault();
+    const data=Object.fromEntries(new FormData(form).entries());
+    const payload={...data,...attribution,page_path:location.pathname,submitted_at:new Date().toISOString(),landing_version:"nh-home-services-v1"};
+    track("generate_lead",{vertical:data.vertical,estimated_ar:Number(data.outstanding_ar||0),source:attribution.utm_source||"direct"});
+    sessionStorage.setItem("nh_last_assessment",JSON.stringify(payload));
+    const endpoint=(window.NEXHAVEN_CONFIG&&window.NEXHAVEN_CONFIG.formEndpoint)||"";
+    if(endpoint){
+      fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)})
+        .then(r=>{if(!r.ok)throw new Error("Submission failed");status.textContent="Assessment received. We’ll follow up within one business day.";form.reset();updateEstimate()})
+        .catch(()=>openEmail(payload));
+    }else openEmail(payload);
   });
-  const updatePricing = () => {
-    const collections = Number(range.value);
-    const rate = foundingRate.checked ? 0.04 : 0.05;
-    const monthlyFee = Math.max(2500, collections * rate);
-    collectionsLabel.textContent = `${money.format(collections)} managed`;
-    feeLabel.textContent = `${money.format(monthlyFee)}/mo`;
-    const hireBenchmark = 5580;
-    const difference = Math.abs(monthlyFee - hireBenchmark);
-    comparisonLabel.textContent = monthlyFee >= hireBenchmark
-      ? `At this collections level, NexHaven is about ${money.format(difference)}/month more than this single-hire benchmark.`
-      : `At this collections level, NexHaven is about ${money.format(difference)}/month below this single-hire benchmark.`;
-    rateLabel.textContent = foundingRate.checked
-      ? "Founding Practice Program · 4% for 90 days · $2,500 minimum"
-      : "Standard package · 5% · $2,500 minimum";
-  };
-  range.addEventListener("input", updatePricing);
-  foundingRate.addEventListener("change", updatePricing);
-  updatePricing();
+  function openEmail(payload){
+    const lines=[
+      "Revenue Leakage Assessment","",
+      `Name: ${payload.name}`,`Company: ${payload.company}`,`Email: ${payload.email}`,`Phone: ${payload.phone||""}`,
+      `Vertical: ${payload.vertical}`,`Annual revenue: ${payload.annual_revenue||""}`,`Primary system: ${payload.system||""}`,`Jobs per month: ${payload.monthly_jobs||""}`,
+      `Outstanding A/R: $${payload.outstanding_ar||0}`,`Stale estimates: $${payload.stale_estimates_value||0}`,
+      `Current process: ${payload.follow_up_process||""}`,`Main bottleneck: ${payload.bottleneck||""}`,
+      "",`Attribution: ${JSON.stringify(attribution)}`
+    ];
+    status.textContent="Your email app is opening with the assessment. Send it to complete your request.";
+    location.href=`mailto:info@nexhavenos.com?subject=${encodeURIComponent("Revenue Leakage Assessment — "+payload.company)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  }
 }

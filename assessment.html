@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revenue Leakage Assessment | NexHaven Systems</title><meta name="description" content="Estimate how much revenue may be waiting in overdue invoices and stale home-service estimates."><meta name="robots" content="noindex"><link rel="canonical" href="https://nexhavenos.com/assessment.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body>
+<header><div class="wrap nav"><a class="brand" href="/"><span>N</span><div><b>NexHaven</b><small>Systems</small></div></a><a class="outline" href="/">Back to overview</a></div></header>
+<main class="assessment-shell"><div class="wrap assessment-grid">
+  <section><p class="eyebrow">Revenue Leakage Assessment</p><h1>Find the first portfolio worth recovering.</h1><p class="lead">Share high-level totals only—do not include customer names, invoice details, or sensitive account information. We’ll use your answers to scope a focused review.</p>
+    <div class="metric-strip"><div><b>5–7 minutes</b><span>to complete</span></div><div><b>No obligation</b><span>assessment only</span></div></div>
+    <div class="estimate-card" id="recovery-estimate"></div>
+  </section>
+  <form class="form-card" id="assessment-form">
+    <h2>About your operation</h2>
+    <div class="field-grid">
+      <div class="field"><label for="name">Your name *</label><input id="name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="company">Company *</label><input id="company" name="company" required autocomplete="organization"></div>
+      <div class="field"><label for="email">Work email *</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="vertical">Trade *</label><select id="vertical" name="vertical" required><option value="">Choose one</option><option value="hvac">HVAC</option><option value="plumbing">Plumbing</option><option value="roofing">Roofing</option><option value="other">Other home service</option></select></div>
+      <div class="field"><label for="annual_revenue">Annual revenue range</label><select id="annual_revenue" name="annual_revenue"><option value="">Prefer not to say</option><option>Under $1M</option><option>$1M–$3M</option><option>$3M–$7.5M</option><option>$7.5M–$15M</option><option>$15M+</option></select></div>
+      <div class="field"><label for="system">Primary operating system</label><select id="system" name="system"><option value="">Choose one</option><option>ServiceTitan</option><option>Housecall Pro</option><option>Jobber</option><option>FieldEdge</option><option>QuickBooks only</option><option>Spreadsheets / other</option></select></div>
+      <div class="field"><label for="monthly_jobs">Approx. jobs per month</label><select id="monthly_jobs" name="monthly_jobs"><option value="">Choose a range</option><option>Under 50</option><option>50–149</option><option>150–399</option><option>400+</option></select></div>
+      <div class="field"><label for="outstanding_ar">Approx. outstanding A/R ($)</label><input id="outstanding_ar" name="outstanding_ar" type="number" min="0" step="1000" placeholder="75000"></div>
+      <div class="field"><label for="stale_estimates_value">Approx. stale estimate value ($)</label><input id="stale_estimates_value" name="stale_estimates_value" type="number" min="0" step="1000" placeholder="150000"></div>
+      <div class="field full"><label for="follow_up_process">How is follow-up handled today?</label><select id="follow_up_process" name="follow_up_process"><option value="">Choose the closest answer</option><option>Owner follows up when possible</option><option>Office team follows up inconsistently</option><option>Dedicated person with limited capacity</option><option>Documented and consistent process</option><option>No defined process</option></select></div>
+      <div class="field full"><label for="bottleneck">What is the biggest revenue follow-up bottleneck?</label><textarea id="bottleneck" name="bottleneck" placeholder="A short description is enough. Do not include customer information."></textarea></div>
+    </div>
+    <p class="privacy-note">By submitting, you ask NexHaven to contact you about this assessment. Do not submit consumer or customer account data here. See our <a href="privacy.html">Privacy Policy</a>.</p>
+    <div class="form-actions"><button class="button primary" type="submit">Send my assessment</button><span class="form-status" id="form-status" aria-live="polite"></span></div>
+  </form>
+</div></main>
+<footer><div class="wrap footer-grid"><div><a class="brand" href="/"><span>N</span><div><b>NexHaven</b><small>Systems</small></div></a><p>Your back office, managed for you.</p></div><div><b>Contact</b><a href="mailto:info@nexhavenos.com">info@nexhavenos.com</a></div><div><b>Legal</b><a href="privacy.html">Privacy Policy</a></div><div><span>© <span id="year"></span> NexHaven Systems LLC</span></div></div></footer>
+<script src="config.js"></script><script src="script.js?v=3"></script><script>const requested=new URLSearchParams(location.search).get("vertical");if(requested&&document.getElementById("vertical"))document.getElementById("vertical").value=requested;</script></body></html>
