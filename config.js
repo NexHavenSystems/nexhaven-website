@@ -1,4 +1,5 @@
 window.NEXHAVEN_CONFIG = {
-  // Add the approved CRM/webhook endpoint here. Until then, the assessment opens a prefilled email.
-  formEndpoint: ""
+  // The hosted bridge forwards to the approved CRM and/or Resend. If unavailable,
+  // the assessment safely falls back to a prefilled email.
+  formEndpoint: "https://recovery.nexhavenos.com/api/lead"
 };

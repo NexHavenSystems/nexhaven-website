@@ -5,9 +5,9 @@ Static GitHub Pages website for NexHaven Systems' Home Services Revenue Operatio
 ## Current funnel
 
 - Homepage: managed-operations positioning and 30-Day Revenue Recovery Pilot
-- Vertical pages: HVAC, plumbing, and roofing
+- Vertical pages in launch order: HVAC, roofing, and plumbing
 - Assessment: aggregate Revenue Leakage Assessment with UTM/click-ID capture
-- Submission fallback: prefilled email to info@nexhavenos.com
+- Submission bridge: recovery.nexhavenos.com forwards to CRM/Resend and falls back to a prefilled email if delivery is unavailable
 
 ## Before enabling paid traffic
 
