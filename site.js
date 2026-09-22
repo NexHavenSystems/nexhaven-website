@@ -52,7 +52,7 @@ document.querySelectorAll('a[href]').forEach(a=>{const url=new URL(a.href);if(ur
 function configureServiceFields(form) {
   if (!form) return;
   const role = form.elements.role, vertical = form.elements.vertical, product = form.elements.product;
-  const services = ['Revenue recovery support','Live chat support','Email support','Customer support','Multiple support services'];
+  const services = ['Revenue recovery support','Insurance recovery support','Medical billing support','Invoice follow-up','Statement follow-up','Quote follow-up','Live chat support','Email support','Customer support','Multiple support services'];
   function sync() {
     const client = role.value === 'client';
     for (const option of vertical.options) {
