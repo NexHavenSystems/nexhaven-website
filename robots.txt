@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-Disallow: /assessment.html
-Sitemap: https://nexhavenos.com/sitemap.xml
