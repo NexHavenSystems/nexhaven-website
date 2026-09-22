@@ -14,3 +14,6 @@
 .staffing-contact{display:flex;justify-content:space-between;align-items:center;gap:32px;margin-top:32px}.staffing-contact h3{margin-bottom:10px}.staffing-contact p{color:var(--muted);margin:0}.staffing-contact .button{flex-shrink:0}
 @media(min-width:701px) and (max-width:1000px){nav{gap:12px}nav a{font-size:13px}nav .button{padding:11px 14px}.header-row{gap:16px}}
 @media(max-width:700px){.call-center-intro{grid-template-columns:1fr;gap:24px}.staff-capacity{padding:28px}.staffing-contact{display:block}.staffing-contact .button{margin-top:22px;width:100%}}
+
+/* Managed support pilot */
+.pilot-intro{display:flex;align-items:center;justify-content:space-between;gap:36px;background:#e9efff;padding:32px;border-radius:10px}.pilot-intro h2{margin-bottom:12px}.pilot-intro p{max-width:720px;margin:0;color:var(--muted)}.pilot-intro .button{flex-shrink:0}.pilot-pricing .card{display:flex;flex-direction:column}.pilot-pricing .button{margin-top:auto}.pilot-pricing .pilot-price{font:700 36px/1.3 Manrope,Arial,sans-serif;color:var(--blue);letter-spacing:-1px}.pilot-price span{font:400 14px/1.5 'DM Sans',Arial,sans-serif;color:var(--muted);letter-spacing:0}.pilot-terms{margin-top:24px;max-width:1000px}.pilot-details{padding-top:0}@media(max-width:700px){.pilot-intro{display:block;padding:26px}.pilot-intro .button{margin-top:24px;width:100%}}
