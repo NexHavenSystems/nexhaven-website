@@ -8,7 +8,7 @@ if(intakeConfig.intakeUrl&&document.querySelector('#partner-form')){
  if(allowed){
   const params=new URLSearchParams(location.search);
   for(const k of ['role','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid'])if(params.has(k))url.searchParams.set(k,params.get(k).slice(0,200));
-  const frame=document.createElement('iframe');frame.src=url.href;frame.title='LeadCo business partnership inquiry';frame.style='width:100%;height:1700px;border:1px solid #dce3eb;border-radius:12px;background:white';
+  const frame=document.createElement('iframe');frame.src=url.href;frame.title='LeadCo business service inquiry';frame.style='width:100%;height:1700px;border:1px solid #dce3eb;border-radius:12px;background:white';
   document.querySelector('#partner-form').replaceWith(frame);
  }
 }
@@ -16,7 +16,7 @@ if(intakeConfig.intakeUrl&&document.querySelector('#partner-form')){
 const form=document.querySelector('#partner-form');
 if(form){
  const params=new URLSearchParams(location.search);const initialRole=params.get('role');
- if(['buyer','publisher','client'].includes(initialRole))form.elements.role.value=initialRole;
+ if(['buyer','client'].includes(initialRole))form.elements.role.value=initialRole;
  const emailMode=intakeConfig.mode==='email';
  if(emailMode){
   form.querySelector('button[type=submit]').textContent='Review inquiry';
@@ -35,7 +35,7 @@ if(form){
   inquiry={inquiry_id:crypto.randomUUID(),created_at:new Date().toISOString(),status:'Review draft — not submitted',details,attribution,source_page:location.pathname,notice_version:'leadco-partner-preview-2026-09-17',business_information_only:true};
   document.querySelector('#inquiry-summary').textContent=Object.entries(details).map(([k,v])=>`${k.replaceAll('_',' ')}: ${v||'Not provided'}`).join('\n');
   if(emailMode){
-   const subject=details.role==='client'?'LeadCo call center inquiry':'LeadCo partnership inquiry';
+   const subject=details.role==='client'?'LeadCo support and billing inquiry':'LeadCo lead inquiry';
    const body=document.querySelector('#inquiry-summary').textContent+'\n\nReference: '+inquiry.inquiry_id;
    document.querySelector('#email-inquiry').href='mailto:atlas@nexhavenos.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }
@@ -43,29 +43,32 @@ if(form){
  });
  document.querySelector('#download-inquiry').addEventListener('click',()=>{if(!inquiry)return;const blob=new Blob([JSON.stringify(inquiry,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LeadCo-partner-inquiry.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 }
-document.querySelector('#footer').innerHTML=`<div class="wrap"><div class="footer-top"><div><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">L</span>LeadCo</a><p class="fine" style="margin-top:14px">Lead generation. Qualification. Distribution.</p></div><div class="footer-links"><a href="buyers.html">For buyers</a><a href="publishers.html">For publishers</a><a href="verticals.html">Verticals</a><a href="lending.html">Consumer lending</a><a href="home-services.html">Home services</a><a href="quality.html">Compliance & quality</a><a href="call-center.html">Call Center</a><a href="about.html">About LeadCo</a><a href="contact.html">Contact</a><a href="leadco-privacy.html">Business inquiry privacy</a></div></div><p class="footer-note">© ${new Date().getFullYear()} NexHaven Systems LLC dba LeadCo. Business contact: <a href="mailto:atlas@nexhavenos.com">atlas@nexhavenos.com</a> · <a href="tel:+17275134515">(727) 513-4515</a>.<br>Correspondence: 7901 4th St N, Ste 300, St. Petersburg, FL 33702.<br> LeadCo is a lead supplier and distributor, not a lender. Financing decisions and service availability are determined by the relevant provider. Campaign availability is subject to buyer approval.</p></div>`;
+document.querySelector('#footer').innerHTML=`<div class="wrap"><div class="footer-top"><div><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">L</span>LeadCo</a><p class="fine" style="margin-top:14px">Leads. Customer support. Revenue follow-up.</p></div><div class="footer-links"><a href="lending.html">Payday &amp; mortgage leads</a><a href="call-center.html">Call Center</a><a href="call-center.html#medical">Billing &amp; Recovery</a><a href="quality.html">Quality</a><a href="about.html">About LeadCo</a><a href="contact.html">Contact</a><a href="leadco-privacy.html">Business inquiry privacy</a></div></div><p class="footer-note">© ${new Date().getFullYear()} NexHaven Systems LLC dba LeadCo. Business contact: <a href="mailto:atlas@nexhavenos.com">atlas@nexhavenos.com</a> · <a href="tel:+17275134515">(727) 513-4515</a>.<br>Correspondence: 7901 4th St N, Ste 300, St. Petersburg, FL 33702.<br> LeadCo provides leads and business support services. LeadCo is not a lender and does not make financing decisions. Lead availability, service scope and commercial terms are confirmed before delivery.</p></div>`;
 // Carry campaign attribution across local navigation without storing it.
 const campaignParams=new URLSearchParams(location.search);
 document.querySelectorAll('a[href]').forEach(a=>{const url=new URL(a.href);if(url.origin!==location.origin||!url.pathname.endsWith('.html'))return;for(const key of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid']){if(campaignParams.has(key))url.searchParams.set(key,campaignParams.get(key).slice(0,300));}a.href=url.href;});
 
-// Keep call center requests distinct from lead buying and supply inquiries.
+// Keep each inquiry aligned to the current lead and service offer.
 function configureServiceFields(form) {
   if (!form) return;
   const role = form.elements.role, vertical = form.elements.vertical, product = form.elements.product;
-  const services = ['Revenue recovery support','Insurance recovery support','Medical billing support','Invoice follow-up','Statement follow-up','Quote follow-up','Live chat support','Email support','Customer support','Multiple support services'];
+  const productsByArea = {
+    'Payday lending': ['Payday leads'],
+    'Mortgage lending': ['Mortgage leads'],
+    'Payday & mortgage': ['Payday & mortgage leads'],
+    'Call center': ['Phone support','Email support','Live chat support','Customer support','Multiple support services','Invoice follow-up','Statement follow-up','Quote follow-up'],
+    'Medical billing & recovery': ['Insurance revenue recovery','Medical billing','Insurance recovery & billing']
+  };
   function sync() {
-    const client = role.value === 'client';
-    for (const option of vertical.options) {
-      option.hidden = option.disabled = Boolean(option.value) && (client ? option.value !== 'Call center' : option.value === 'Call center');
-    }
-    if (client) vertical.value = 'Call center';
-    else if (vertical.value === 'Call center') vertical.value = '';
-    for (const option of product.options) {
-      option.hidden = option.disabled = Boolean(option.value) && (client !== services.includes(option.value));
-    }
+    const areas = role.value === 'client' ? ['Call center','Medical billing & recovery'] : role.value === 'buyer' ? ['Payday lending','Mortgage lending','Payday & mortgage'] : [];
+    for (const option of vertical.options) option.hidden = option.disabled = Boolean(option.value) && !areas.includes(option.value);
+    if (!areas.includes(vertical.value)) vertical.value = role.value === 'client' ? 'Call center' : '';
+    const allowed = productsByArea[vertical.value] || [];
+    for (const option of product.options) option.hidden = option.disabled = Boolean(option.value) && !allowed.includes(option.value);
     if (product.selectedOptions[0]?.disabled) product.value = '';
   }
   role.addEventListener('change', sync);
+  vertical.addEventListener('change', sync);
   sync();
 }
 configureServiceFields(document.querySelector('#partner-form'));
