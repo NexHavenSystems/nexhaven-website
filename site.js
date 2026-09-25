@@ -72,3 +72,45 @@ function configureServiceFields(form) {
   sync();
 }
 configureServiceFields(document.querySelector('#partner-form'));
+
+// Callback requests use the reviewed email handoff, not an unconfigured SMS service.
+const callbackForm = document.querySelector('#callback-form');
+if (callbackForm) {
+ const result = document.querySelector('#callback-result');
+ const emailLink = document.querySelector('#email-callback');
+ const canEmail = ['email', 'live'].includes(intakeConfig.mode);
+ if (canEmail) {
+  document.querySelector('#callback-notice').textContent = 'Review your request, then send the prepared email to Atlas. The request is not received until you send that email.';
+  document.querySelector('#callback-instructions').textContent = 'Open and send the email below to request your call. Atlas will confirm arrangements by email; no appointment has been booked yet.';
+ }
+ callbackForm.addEventListener('input', () => {
+  result.hidden = true;
+  emailLink.hidden = true;
+  emailLink.removeAttribute('href');
+ });
+ callbackForm.addEventListener('submit', event => {
+  event.preventDefault();
+  if (!callbackForm.reportValidity()) return;
+  const data = Object.fromEntries(new FormData(callbackForm));
+  const body = [
+   'Business callback request',
+   'Name: ' + data.contact_name.trim(),
+   'Company: ' + data.company.trim(),
+   'Email: ' + data.email.trim(),
+   'Callback number: ' + data.phone.trim(),
+   'Preferred day/time: ' + data.preferred_time.trim(),
+   'Time zone: ' + data.time_zone.trim(),
+   'Service: ' + data.service,
+   '',
+   'I request a call about this business inquiry. No marketing-text subscription.',
+   'Please confirm callback arrangements by email.'
+  ].join('\n');
+  document.querySelector('#callback-summary').textContent = body;
+  if (canEmail) {
+   emailLink.href = 'mailto:atlas@nexhavenos.com?subject=' + encodeURIComponent('LeadCo callback request') + '&body=' + encodeURIComponent(body);
+   emailLink.hidden = false;
+  }
+  result.hidden = false;
+  result.focus();
+ });
+}
