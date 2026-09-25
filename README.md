@@ -17,3 +17,11 @@ Static GitHub Pages website for NexHaven Systems' Home Services Revenue Operatio
 4. Have qualified counsel review the privacy policy and outreach practices.
 
 Do not collect customer names, invoice details, payment information, or other sensitive account data through the public assessment.
+
+## LeadCo launch candidate (September 22, 2026)
+
+The proposed root homepage presents LeadCo lead partnerships and call center services. The previous recovery homepage is preserved at revenue-recovery.html; existing recovery pages, config.js, privacy.html, script.js, styles.css and CNAME are unchanged. LeadCo uses leadco-config.js, site.js, site.css and leadco-privacy.html.
+
+The first launch option uses email intake: visitors review their business inquiry, open a prepared email to atlas@nexhavenos.com, and send it in their own email application. The page does not claim that an email was sent or create a CRM receipt. Authorized operators record received business inquiries in the dedicated LeadCo CRM. Automated Google Apps Script intake remains a separate activation step.
+
+Publication is pending owner review. Verify www DNS and business phone routing before promoting the website. Lead inventory and staffing availability still require their respective operating evidence and commercial terms before any sale or service commitment.
