@@ -8,7 +8,7 @@ if(intakeConfig.intakeUrl&&document.querySelector('#partner-form')){
  if(allowed){
   const params=new URLSearchParams(location.search);
   for(const k of ['role','utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid'])if(params.has(k))url.searchParams.set(k,params.get(k).slice(0,200));
-  const frame=document.createElement('iframe');frame.src=url.href;frame.title='LeadCo business service inquiry';frame.style='width:100%;height:1700px;border:1px solid #dce3eb;border-radius:12px;background:white';
+  const frame=document.createElement('iframe');frame.src=url.href;frame.title='NexHaven business service inquiry';frame.style='width:100%;height:1700px;border:1px solid #dce3eb;border-radius:12px;background:white';
   document.querySelector('#partner-form').replaceWith(frame);
  }
 }
@@ -16,14 +16,14 @@ if(intakeConfig.intakeUrl&&document.querySelector('#partner-form')){
 const form=document.querySelector('#partner-form');
 if(form){
  const params=new URLSearchParams(location.search);const initialRole=params.get('role');
- if(['buyer','client'].includes(initialRole))form.elements.role.value=initialRole;
+ if(['client'].includes(initialRole))form.elements.role.value=initialRole;
  const emailMode=intakeConfig.mode==='email';
  if(emailMode){
   form.querySelector('button[type=submit]').textContent='Review inquiry';
   form.querySelector('.notice').textContent='Review your details, then open an email to our team. Your request is sent only when you send that email.';
   document.querySelector('#form-result h3').textContent='Your inquiry is ready';
   document.querySelector('#form-result p').textContent='Open the prepared email, check its contents, and send it to atlas@nexhavenos.com. Nothing has been sent yet.';
-  const emailLink=document.createElement('a');emailLink.id='email-inquiry';emailLink.className='button';emailLink.textContent='Open email to LeadCo';
+  const emailLink=document.createElement('a');emailLink.id='email-inquiry';emailLink.className='button';emailLink.textContent='Open email to NexHaven';
   document.querySelector('#download-inquiry').before(emailLink);
  }
  let inquiry=null;let started=false;
@@ -35,15 +35,15 @@ if(form){
   inquiry={inquiry_id:crypto.randomUUID(),created_at:new Date().toISOString(),status:'Review draft — not submitted',details,attribution,source_page:location.pathname,notice_version:'leadco-partner-preview-2026-09-17',business_information_only:true};
   document.querySelector('#inquiry-summary').textContent=Object.entries(details).map(([k,v])=>`${k.replaceAll('_',' ')}: ${v||'Not provided'}`).join('\n');
   if(emailMode){
-   const subject=details.role==='client'?'LeadCo support and billing inquiry':'LeadCo lead inquiry';
+   const subject='NexHaven business services inquiry';
    const body=document.querySelector('#inquiry-summary').textContent+'\n\nReference: '+inquiry.inquiry_id;
    document.querySelector('#email-inquiry').href='mailto:atlas@nexhavenos.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   }
   document.querySelector('#form-result').hidden=false;document.querySelector('#form-result').focus();emit('partner_inquiry_prepared');
  });
- document.querySelector('#download-inquiry').addEventListener('click',()=>{if(!inquiry)return;const blob=new Blob([JSON.stringify(inquiry,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='LeadCo-partner-inquiry.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ document.querySelector('#download-inquiry').addEventListener('click',()=>{if(!inquiry)return;const blob=new Blob([JSON.stringify(inquiry,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='NexHaven-partner-inquiry.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 }
-document.querySelector('#footer').innerHTML=`<div class="wrap"><div class="footer-top"><div><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">L</span>LeadCo</a><p class="fine" style="margin-top:14px">Leads. Customer support. Revenue follow-up.</p></div><div class="footer-links"><a href="lending.html">Payday &amp; mortgage leads</a><a href="call-center.html">Customer support</a><a href="medical-billing.html">Medical billing &amp; recovery</a><a href="quality.html">Quality</a><a href="about.html">Questions &amp; Answers</a><a href="contact.html">Contact</a><a href="leadco-privacy.html">Business inquiry privacy</a></div></div><p class="footer-note">© ${new Date().getFullYear()} NexHaven Systems LLC dba LeadCo. Business contact: <a href="mailto:atlas@nexhavenos.com">atlas@nexhavenos.com</a> · <a href="tel:+17275134515">(727) 513-4515</a>.<br>Correspondence: 7901 4th St N, Ste 300, St. Petersburg, FL 33702.<br> LeadCo provides leads and business support services. LeadCo is not a lender and does not make financing decisions. Lead availability, service scope and commercial terms are confirmed before delivery.</p></div>`;
+document.querySelector('#footer').innerHTML=`<div class="wrap"><div class="footer-top"><div><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">N</span>NexHaven</a><p class="fine" style="margin-top:14px">Call center. Customer support. Revenue recovery.</p></div><div class="footer-links"><a href="revenue-follow-up.html">Revenue recovery</a><a href="call-center.html">Customer support</a><a href="medical-billing.html">Medical billing &amp; recovery</a><a href="quality.html">Quality</a><a href="about.html">Questions &amp; Answers</a><a href="contact.html">Contact</a><a href="leadco-privacy.html">Business inquiry privacy</a></div></div><p class="footer-note">© ${new Date().getFullYear()} NexHaven Systems LLC. Business contact: <a href="mailto:atlas@nexhavenos.com">atlas@nexhavenos.com</a> · <a href="tel:+17275134515">(727) 513-4515</a>.<br>Correspondence: 7901 4th St N, Ste 300, St. Petersburg, FL 33702.<br> NexHaven provides managed call center and administrative revenue recovery services. Scope, staffed coverage and commercial terms are agreed before delivery.</p></div>`;
 // Carry campaign attribution across local navigation without storing it.
 const campaignParams=new URLSearchParams(location.search);
 document.querySelectorAll('a[href]').forEach(a=>{const url=new URL(a.href);if(url.origin!==location.origin||!url.pathname.endsWith('.html'))return;for(const key of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','msclkid']){if(campaignParams.has(key))url.searchParams.set(key,campaignParams.get(key).slice(0,300));}a.href=url.href;});
@@ -53,14 +53,11 @@ function configureServiceFields(form) {
   if (!form) return;
   const role = form.elements.role, vertical = form.elements.vertical, product = form.elements.product;
   const productsByArea = {
-    'Payday lending': ['Payday leads'],
-    'Mortgage lending': ['Mortgage leads'],
-    'Payday & mortgage': ['Payday & mortgage leads'],
     'Call center': ['Phone support','Email support','Live chat support','Customer support','Multiple support services','Invoice follow-up','Statement follow-up','Quote follow-up'],
     'Medical billing & recovery': ['Insurance revenue recovery','Medical billing','Insurance recovery & billing']
   };
   function sync() {
-    const areas = role.value === 'client' ? ['Call center','Medical billing & recovery'] : role.value === 'buyer' ? ['Payday lending','Mortgage lending','Payday & mortgage'] : [];
+    const areas = role.value === 'client' ? ['Call center','Medical billing & recovery'] : [];
     for (const option of vertical.options) option.hidden = option.disabled = Boolean(option.value) && !areas.includes(option.value);
     if (!areas.includes(vertical.value)) vertical.value = role.value === 'client' ? 'Call center' : '';
     const allowed = productsByArea[vertical.value] || [];
@@ -107,7 +104,7 @@ if (callbackForm) {
   ].join('\n');
   document.querySelector('#callback-summary').textContent = body;
   if (canEmail) {
-   emailLink.href = 'mailto:atlas@nexhavenos.com?subject=' + encodeURIComponent('LeadCo callback request') + '&body=' + encodeURIComponent(body);
+   emailLink.href = 'mailto:atlas@nexhavenos.com?subject=' + encodeURIComponent('NexHaven callback request') + '&body=' + encodeURIComponent(body);
    emailLink.hidden = false;
   }
   result.hidden = false;

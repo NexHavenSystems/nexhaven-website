@@ -4,3 +4,38 @@
 @media(max-width:900px){.hero-grid,.split,.assessment-grid{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.metric-strip{grid-template-columns:1fr 1fr}#menu{display:block;background:white;border:1px solid var(--line);border-radius:9px;padding:8px 11px}nav{display:none;position:absolute;top:74px;left:18px;right:18px;background:white;border:1px solid var(--line);border-radius:15px;padding:17px;flex-direction:column;align-items:stretch}nav.open{display:flex}}
 @media(max-width:620px){.cards,.steps,.proof-grid,.footer-grid,.field-grid,.metric-strip{grid-template-columns:1fr}.proof-grid div{border-right:0;border-bottom:1px solid var(--line)}.cta-box{display:grid}.section{padding:70px 0}.hero{padding:60px 0}.form-card{padding:22px}.field.full{grid-column:auto}}
 .ladder a{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;margin:0;display:grid;text-decoration:none}.ladder a:hover{border-color:var(--green)}
+/* Two-offer expansion: preserve the NexHaven forest/mint brand. */
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid #237a55;outline-offset:5px}
+section[id]{scroll-margin-top:94px}
+.skip-link{position:fixed;top:-100px;left:18px;z-index:30;padding:12px 18px;background:var(--forest);color:#fff;border-radius:10px}.skip-link:focus{top:12px}
+h1 em{font-style:normal;color:var(--green)}
+.hero-grid>*,.split>*,.assessment-grid>*,.cards>*{min-width:0}
+.audit-offer{border:1px solid #bddbc9;background:linear-gradient(145deg,#e5f2ea,#d3eadc);padding:32px}
+.audit-offer strong{font-size:clamp(36px,4.4vw,53px);letter-spacing:-.06em;white-space:nowrap}
+.offer-topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:38px}
+.stage-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--green)}
+.audit-mark{display:grid;place-items:center;width:50px;height:50px;border:1px solid #a6cdb6;border-radius:50%;font-size:30px;color:var(--forest)}
+.secondary-path{font-size:13px;color:var(--muted);margin-top:25px;max-width:520px}.secondary-path a{color:var(--forest);font-weight:600}
+.button{gap:10px;text-align:center;font-family:inherit;font-size:14px;line-height:1.45;transition:background .15s,box-shadow .15s}.button:hover{box-shadow:0 4px 16px #143d3122}.button:disabled{cursor:wait;opacity:.7}
+.offer-pair{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;margin-top:40px}
+.service-feature{padding:38px;border:1px solid #bddbc9;background:#e5f2ea;border-radius:24px}.service-feature.secondary{background:white;border-color:var(--line)}
+.service-feature h3{font-size:clamp(28px,3.5vw,40px);margin:24px 0 16px}.service-feature>p{color:var(--muted)}
+.service-feature .service-price{color:var(--forest);font:800 25px Manrope,sans-serif;margin:26px 0}.service-price span{display:block;color:var(--muted);font:400 13px/1.5 Inter,sans-serif;margin-top:8px}
+.dark-copy{color:#c9ded2;font-size:18px}.dark .text-link{color:#a7e5bf}
+.text-link{color:var(--forest);font-weight:700;font-size:14px;text-underline-offset:5px}.narrow{max-width:780px}
+.growth-cards article{display:flex;flex-direction:column;padding:28px}.growth-cards h3{font-size:25px;line-height:1.18;margin-top:23px}.growth-cards .featured{border:2px solid var(--green);background:#edf6f0}
+.growth-cards .price{font:800 32px Manrope,sans-serif;color:var(--forest);margin:22px 0 8px}.price small{display:block;font:500 13px Inter,sans-serif;margin-top:7px}
+.growth-cards .fine-print{font-size:13px;margin-top:auto;padding-top:12px}.growth-cards .text-link{margin-top:12px}.stage-label.future{color:var(--muted)}
+.deliverable-bar{background:#e5f2ea;border:1px solid #bfd6c8;border-radius:20px;padding:28px;margin-top:22px;display:flex;align-items:center;gap:30px}.deliverable-bar p{color:var(--muted);margin-bottom:0;font-size:14px}.deliverable-bar>a{flex-shrink:0}
+.process-list{display:grid;gap:24px;padding-left:25px;margin:0}.process-list li{padding-left:12px;color:#9ee5be}.process-list b,.process-list span{display:block}.process-list b{color:#fff;font:700 21px Manrope,sans-serif}.process-list span{color:#c9ded2;margin-top:8px;font-size:15px}
+.faq-section{padding-top:0}details{border-bottom:1px solid var(--line);padding:22px 0}details:first-of-type{margin-top:26px}summary{cursor:pointer;font-weight:700}details p{color:var(--muted);margin-bottom:0}
+.form-heading{font-size:clamp(38px,4.8vw,60px)}.form-intro{font-size:13px;color:var(--muted)}.form-actions{flex-wrap:wrap}.form-status{display:block;flex-basis:100%}
+.email-fallback{padding:20px;margin-top:20px;background:#f4f8f5;border:1px solid var(--line);border-radius:14px;font-size:14px}.email-fallback .button{margin:0 8px 12px 0}.email-fallback label{display:block;font-weight:700;margin-bottom:8px}.email-fallback textarea{width:100%;font:13px/1.5 Inter,sans-serif;border:1px solid var(--line);padding:10px;border-radius:8px;resize:vertical}
+.cta-box>.button{flex-shrink:0}.footer-grid .brand b{color:#fff;font-size:16px}
+@media(max-width:1000px){nav{gap:14px}.hero-grid{gap:36px}.growth-cards{grid-template-columns:1fr}.growth-cards .fine-print{margin-top:0}}
+@media(max-width:900px){.hero-grid{gap:42px}.audit-offer{max-width:640px}.offer-pair{grid-template-columns:1fr}.deliverable-bar{display:block}.deliverable-bar>a{display:inline-block;margin-top:15px}.assessment-grid{gap:30px}}
+@media(max-width:620px){.service-feature{padding:26px}.audit-offer{padding:26px}.offer-topline{margin-bottom:26px}.cta-box{padding:28px}.hero-grid{gap:32px}.actions{flex-direction:column}.actions .button{width:100%}.nav{gap:10px}.form-card{padding:20px}.field input,.field select,.field textarea{min-width:0}.footer-grid{gap:28px}.form-actions>.button{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+
+#pilot,#industries{scroll-margin-top:100px}.trade-links{font-size:13px;margin-bottom:0}.disclaimer{color:#a9b9b0}
