@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://nexhavenos.com/sitemap.xml
