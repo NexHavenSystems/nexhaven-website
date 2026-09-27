@@ -4,8 +4,12 @@ The existing static GitHub Pages site at https://nexhavenos.com, updated Septemb
 
 ## Offers and routes
 
-- `/`: Vacation Rental Profit Audit first; Home Services Revenue Recovery second.
-- `/vacation-rentals.html`: $497–$997 paid audit, full review scope, estimated revenue leakage, and a 30-day plan. Indicative 8–10% booking-revenue optimization path; future 15–18% Full Management explicitly unavailable until licensing/operating readiness.
+- `/`: NexHaven call center and administrative revenue recovery. Support and routine follow-up $12 per agent-hour; medical billing/insurance follow-up $14 per agent-hour or an agreed recovery percentage.
+- `/call-center.html`, `/revenue-follow-up.html`, `/medical-billing.html`: current service pages.
+- `/contact.html`: callback and service inquiry preparation. Visitors must send the prepared email to Atlas; the page does not submit to a CRM or confirm an appointment.
+- `/about.html`: Q&A and Talk to Atlas.
+- Existing rental and home-service routes below remain available as separately scoped offers.
+- `/vacation-rentals.html`: $497â€“$997 paid audit, full review scope, estimated revenue leakage, and a 30-day plan. Indicative 8â€“10% booking-revenue optimization path; future 15â€“18% Full Management explicitly unavailable until licensing/operating readiness.
 - `/vacation-audit.html`: quote request; no checkout or payment collection. Supports `?interest=optimization`.
 - `/revenue-recovery.html`: preserved $1,500 launch-price 30-Day Revenue Recovery Pilot; A/R, stale estimates, financing follow-up, CRM updates, promises to pay, and weekly reporting.
 - `/hvac.html`, `/plumbing.html`, `/roofing.html`: existing trade-specific funnels.
@@ -53,3 +57,10 @@ Existing GitHub Pages configuration: `NexHavenSystems/nexhaven-website`, branch 
 For another static host, serve the root HTML/CSS/JS/SVG files. The form bridge would need to allow that host's origin before automatic delivery can work; email fallback remains available. There is no database migration.
 
 Rollback by reverting the offer-update commit and publishing the revert to `main`. Preserve subsequent changes when reverting.
+
+## September 26 rebrand review candidate
+NexHaven call center, revenue follow-up and administrative medical billing replace public LeadCo lead sales. LeadCo is internal acquisition only. New service forms prepare email for the visitor to send; they do not automatically create CRM records. Existing rental/home-services funnels, bridge configuration and recovery assets are preserved. This branch remains a draft, not a production deployment.
+
+## September 27 launch
+
+Owner requested publication of the call-center/revenue-recovery rebrand. No two-minute response or 24/7 guarantee. LeadCo remains internal. Public service inquiries use the explicit email handoff (`leadco-config.js` mode `email`); no prospect acknowledgments are enabled by the website.
